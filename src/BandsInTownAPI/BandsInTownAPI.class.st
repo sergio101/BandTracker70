@@ -41,7 +41,7 @@ BandsInTownAPI class >> apiKey: anObject [
 
 { #category : #accessing }
 BandsInTownAPI class >> url [
-	^ 'https://rest.bandsintown.com/'
+	^ 'https://rest.bandsintown.com'
 
 ]
 

@@ -12,7 +12,7 @@ BTApplicationRootComponent class >> canBeRoot [
 ^  true
 ]
 
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 BTApplicationRootComponent class >> initialize [
 	"self initialize"
 
@@ -21,7 +21,7 @@ BTApplicationRootComponent class >> initialize [
 	app preferenceAt: #sessionClass put: BTSession.
 	app
 		addLibrary: JQDeploymentLibrary;
-		addLibrary: JQUiDeploymentLibrary
+		addLibrary: JQUiDeploymentLibrary.
 ]
 
 { #category : #hooks }
