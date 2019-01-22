@@ -23,7 +23,8 @@ BTUserInterface class >> retrieveResultsByZipCode: aZipCode andDistance: distanc
 		do: [ :e | 
 			Transcript
 				show: e asText;
-				cr ]
+				cr ].
+			^ nearEvents
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,7 +34,8 @@ BTUserInterface class >> updateAllData [
 	| startTime endTime |
 	
 	[ 
-	startTime := DateAndTime now.RawListing updateBandEntries.
+	startTime := DateAndTime now.
+	RawListing updateBandEntries.
 	RemoteEntry updateTrackedArtists.
 	TrackedEvent updateEvents.
 	endTime := DateAndTime now.

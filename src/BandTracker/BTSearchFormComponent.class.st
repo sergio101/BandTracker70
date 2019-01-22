@@ -11,8 +11,13 @@ Class {
 
 { #category : #'as yet unclassified' }
 BTSearchFormComponent >> getResults [
+	| results |
 	self session searchData: searchData.
-	self session inspect
+	results := BTUserInterface
+		retrieveResultsByZipCode: (searchData at: 'zipcode')
+		andDistance: self parseDistance.
+		results inspect.
+	^ results
 ]
 
 { #category : #initialization }
@@ -23,6 +28,11 @@ BTSearchFormComponent >> initialize [
 	stationList := Station stations collect: [ :e | e stationName ].
 	distances := #(25 50 75 100).
 	distanceList := distances collect: [ :e | e asString , ' Miles' ].
+]
+
+{ #category : #'as yet unclassified' }
+BTSearchFormComponent >> parseDistance [
+	^ ((searchData at: 'distance') splitOn: ' ') first asInteger
 ]
 
 { #category : #rendering }
@@ -85,6 +95,7 @@ BTSearchFormComponent >> renderZipCodeEntry: html [
 						id: 'enterZipCOde';
 						class: 'form-control';
 						placeholder: 'Zip Code';
+						value: (self session zipcode );
 						callback: [ :value | searchData at: 'zipcode' put: value ] ].
 			html space ]
 ]
