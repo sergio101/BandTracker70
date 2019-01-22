@@ -7,6 +7,11 @@ Class {
 	#category : #'BandTracker-web'
 }
 
+{ #category : #'as yet unclassified' }
+BTSession >> distance [
+	^ searchData at: 'distance' ifAbsent: [ nil ]
+]
+
 { #category : #initialization }
 BTSession >> initialize [
 	super initialize .

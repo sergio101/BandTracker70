@@ -57,6 +57,7 @@ BTSearchFormComponent >> renderDistanceSelect: html [
 						list: distanceList;
 						id: 'selectDistance';
 						class: 'form-control';
+						selected: (self session distance );
 						callback: [ :value | searchData at: 'distance' put: value ] ].
 			html space ]
 ]
