@@ -16,7 +16,7 @@ BTSearchFormComponent >> getResults [
 	results := BTUserInterface
 		retrieveResultsByZipCode: (searchData at: 'zipcode')
 		andDistance: self parseDistance.
-	^ results
+	^ results sort: #date ascending 
 ]
 
 { #category : #initialization }

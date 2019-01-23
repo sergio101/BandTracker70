@@ -48,6 +48,7 @@ BandsInTownAPI class >> url [
 { #category : #'as yet unclassified' }
 BandsInTownAPI >> getBandEvents: bandName [
 	| result url |
+	Transcript show: 'Getting events for: ', bandName; cr .
 	url := ZnUrl new
 		scheme: #http;
 		host: 'rest.bandsintown.com';
