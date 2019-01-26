@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stationList',
 		'distanceList',
-		'searchData'
+		'searchParams'
 	],
 	#category : #'BandTracker-web'
 }
@@ -12,18 +12,13 @@ Class {
 { #category : #'as yet unclassified' }
 BTSearchFormComponent >> getResults [
 	| results |
-	self session searchData: searchData.
-	results := BTUserInterface
-		retrieveResultsByZipCode: (searchData at: 'zipcode')
-		andDistance: self parseDistance.
-	^ results sort: #date ascending 
+	self session appBrain searchParams: searchParams.
 ]
 
 { #category : #initialization }
 BTSearchFormComponent >> initialize [
 	| distances |
 	super initialize.
-	searchData := Dictionary new.
 	stationList := Station stations collect: [ :e | e stationName ].
 	distances := #(25 50 75 100).
 	distanceList := distances collect: [ :e | e asString , ' Miles' ].
@@ -56,8 +51,8 @@ BTSearchFormComponent >> renderDistanceSelect: html [
 						list: distanceList;
 						id: 'selectDistance';
 						class: 'form-control';
-						selected: (self session distance );
-						callback: [ :value | searchData at: 'distance' put: value ] ].
+						selected: (self session appBrain distance );
+						callback: [ :value | searchParams at: 'distance' put: value ] ].
 			html space ]
 ]
 
@@ -73,7 +68,7 @@ BTSearchFormComponent >> renderStationSelect: html [
 						list: stationList;
 						id: 'selectStation';
 						class: 'form-control';
-callback: [ :value | searchData at: 'station' put: value ] ].
+callback: [ :value | searchParams at: 'station' put: value ] ].
 			html space ]
 ]
 
@@ -95,17 +90,7 @@ BTSearchFormComponent >> renderZipCodeEntry: html [
 						id: 'enterZipCOde';
 						class: 'form-control';
 						placeholder: 'Zip Code';
-						value: (self session zipcode );
-						callback: [ :value | searchData at: 'zipcode' put: value ] ].
+						value: (self session appBrain zipCode );
+						callback: [ :value | searchParams at: 'zipcode' put: value ] ].
 			html space ]
-]
-
-{ #category : #accessing }
-BTSearchFormComponent >> searchData [
-	^ searchData
-]
-
-{ #category : #accessing }
-BTSearchFormComponent >> searchData: anObject [
-	searchData := anObject
 ]

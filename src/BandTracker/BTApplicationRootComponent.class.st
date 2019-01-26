@@ -32,7 +32,8 @@ BTApplicationRootComponent >> children [
 { #category : #initialization }
 BTApplicationRootComponent >> initialize [
 	super initialize.
-	main := BTPublicComponent  new
+	main := BTPublicComponent new.
+	
 ]
 
 { #category : #accessing }
