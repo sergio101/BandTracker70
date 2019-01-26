@@ -11,22 +11,23 @@ Class {
 
 { #category : #'as yet unclassified' }
 BTSearchFormComponent >> getResults [
-	| results |
-	self session appBrain searchParams: searchParams.
+	
+	
 ]
 
 { #category : #initialization }
 BTSearchFormComponent >> initialize [
 	| distances |
 	super initialize.
+	self session appBrain inspect.
 	stationList := Station stations collect: [ :e | e stationName ].
 	distances := #(25 50 75 100).
-	distanceList := distances collect: [ :e | e asString , ' Miles' ].
+	distanceList := distances collect: [ :e | e asString , ' Miles' ]
 ]
 
 { #category : #'as yet unclassified' }
 BTSearchFormComponent >> parseDistance [
-	^ ((searchData at: 'distance') splitOn: ' ') first asInteger
+	^ (searchParams at: 'distance') splitOn: ' ' first asInteger
 ]
 
 { #category : #rendering }
@@ -51,8 +52,8 @@ BTSearchFormComponent >> renderDistanceSelect: html [
 						list: distanceList;
 						id: 'selectDistance';
 						class: 'form-control';
-						selected: (self session appBrain distance );
-						callback: [ :value | searchParams at: 'distance' put: value ] ].
+						selected: self session appBrain distance;
+						callback: [ :value | (self session appBrain) distance: value ] ].
 			html space ]
 ]
 
@@ -67,8 +68,7 @@ BTSearchFormComponent >> renderStationSelect: html [
 				tbsFormGroup: [ html select
 						list: stationList;
 						id: 'selectStation';
-						class: 'form-control';
-callback: [ :value | searchParams at: 'station' put: value ] ].
+						class: 'form-control'].
 			html space ]
 ]
 
@@ -90,7 +90,7 @@ BTSearchFormComponent >> renderZipCodeEntry: html [
 						id: 'enterZipCOde';
 						class: 'form-control';
 						placeholder: 'Zip Code';
-						value: (self session appBrain zipCode );
-						callback: [ :value | searchParams at: 'zipcode' put: value ] ].
+						value: (self session) appBrain zipCode;
+						callback: [ :value | self session appBrain zipCode: value ] ].
 			html space ]
 ]
