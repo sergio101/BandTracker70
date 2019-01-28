@@ -3,8 +3,7 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'stationList',
-		'distanceList',
-		'searchParams'
+		'distancesList'
 	],
 	#category : #'BandTracker-web'
 }
@@ -12,22 +11,13 @@ Class {
 { #category : #'as yet unclassified' }
 BTSearchFormComponent >> getResults [
 	
-	
 ]
 
 { #category : #initialization }
 BTSearchFormComponent >> initialize [
-	| distances |
 	super initialize.
-	self session appBrain inspect.
 	stationList := Station stations collect: [ :e | e stationName ].
-	distances := #(25 50 75 100).
-	distanceList := distances collect: [ :e | e asString , ' Miles' ]
-]
-
-{ #category : #'as yet unclassified' }
-BTSearchFormComponent >> parseDistance [
-	^ (searchParams at: 'distance') splitOn: ' ' first asInteger
+	distancesList := #(25 50 75 100).
 ]
 
 { #category : #rendering }
@@ -49,11 +39,12 @@ BTSearchFormComponent >> renderDistanceSelect: html [
 				with: 'Select Channel'.
 			html
 				tbsFormGroup: [ html select
-						list: distanceList;
+						list: distancesList;
+						labels: [ :each | each asString , ' miles' ];
 						id: 'selectDistance';
 						class: 'form-control';
 						selected: self session appBrain distance;
-						callback: [ :value | (self session appBrain) distance: value ] ].
+						callback: [ :value | self session appBrain distance: value ] ].
 			html space ]
 ]
 

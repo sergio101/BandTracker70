@@ -15,5 +15,5 @@ BTSession >> appBrain [
 { #category : #initialization }
 BTSession >> initialize [
 	super initialize .
-	appBrain := ApplicationBrain new.
+	appBrain := BTApplicationBrain new.
 ]
