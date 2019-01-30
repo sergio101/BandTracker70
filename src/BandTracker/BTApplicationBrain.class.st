@@ -5,16 +5,10 @@ Class {
 		'zipCode',
 		'distance',
 		'searchParams',
-		'station',
-		'observers'
+		'station'
 	],
 	#category : #'BandTracker-web'
 }
-
-{ #category : #adding }
-BTApplicationBrain >> addObserver: anObserver [
-	observers add: anObserver.
-]
 
 { #category : #accessing }
 BTApplicationBrain >> distance [
@@ -31,26 +25,6 @@ BTApplicationBrain >> initialize [
 	super initialize.
 	self searchParams: Dictionary new.
 	observers := OrderedCollection new.
-]
-
-{ #category : #adding }
-BTApplicationBrain >> notifyObservers [ 
-observers do: [ :each | each notify ]
-]
-
-{ #category : #accessing }
-BTApplicationBrain >> observers [
-	^ observers
-]
-
-{ #category : #accessing }
-BTApplicationBrain >> observers: anObject [
-	observers := anObject
-]
-
-{ #category : #adding }
-BTApplicationBrain >> removeObservers: anObserver [
-	observers remove: anObserver 
 ]
 
 { #category : #accessing }
