@@ -2,10 +2,16 @@ Class {
 	#name : #BTSession,
 	#superclass : #WASession,
 	#instVars : [
-		'appBrain'
+		'appBrain',
+		'announcer'
 	],
 	#category : #'BandTracker-web'
 }
+
+{ #category : #accessing }
+BTSession >> announcer [
+	^ announcer ifNil: [announcer := Announcer new]
+]
 
 { #category : #accessing }
 BTSession >> appBrain [

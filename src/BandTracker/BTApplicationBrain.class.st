@@ -24,7 +24,6 @@ BTApplicationBrain >> distance: anObject [
 BTApplicationBrain >> initialize [
 	super initialize.
 	self searchParams: Dictionary new.
-	observers := OrderedCollection new.
 ]
 
 { #category : #accessing }
