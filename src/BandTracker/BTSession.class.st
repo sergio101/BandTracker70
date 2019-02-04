@@ -3,7 +3,8 @@ Class {
 	#superclass : #WASession,
 	#instVars : [
 		'appBrain',
-		'announcer'
+		'announcer',
+		'zipCode'
 	],
 	#category : #'BandTracker-web'
 }
@@ -22,4 +23,14 @@ BTSession >> appBrain [
 BTSession >> initialize [
 	super initialize .
 	appBrain := BTApplicationBrain new.
+]
+
+{ #category : #accessing }
+BTSession >> zipCode [
+	^ zipCode
+]
+
+{ #category : #accessing }
+BTSession >> zipCode: anObject [
+	zipCode := anObject
 ]

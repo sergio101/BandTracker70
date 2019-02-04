@@ -16,3 +16,8 @@ BTEventListing >> events [
 BTEventListing >> events: anObject [
 	events := anObject
 ]
+
+{ #category : #rendering }
+BTEventListing >> renderContentOn: html [
+	html paragraph with: 'will render'.
+]

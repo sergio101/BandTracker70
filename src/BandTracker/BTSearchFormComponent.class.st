@@ -18,6 +18,7 @@ BTSearchFormComponent >> initialize [
 	super initialize.
 	stationList := Station stations collect: [ :e | e stationName ].
 	distancesList := #(25 50 75 100).
+
 ]
 
 { #category : #rendering }
@@ -81,7 +82,7 @@ BTSearchFormComponent >> renderZipCodeEntry: html [
 						id: 'enterZipCOde';
 						class: 'form-control';
 						placeholder: 'Zip Code';
-						value: (self session) appBrain zipCode;
-						callback: [ :value | self session appBrain zipCode: value ] ].
+						value: self session zipCode;
+						callback: [ :value | self session zipCode: value ] ].
 			html space ]
 ]
