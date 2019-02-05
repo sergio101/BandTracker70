@@ -25,10 +25,14 @@ BTSearchFormComponent >> initialize [
 BTSearchFormComponent >> renderContentOn: html [
 	html tbsForm
 		beInline;
+		id: 'dataForm';
 		with: [ self renderStationSelect: html.
 			self renderZipCodeEntry: html.
 			self renderDistanceSelect: html.
-			self renderSubmitButtonOn: html. ]
+			self renderSubmitButtonOn: html.
+			html
+				script:
+					'$("#dataForm").validate();$("#enterZipCOde").rules( "add", {minlength: 5, digits: true});' ]
 ]
 
 { #category : #rendering }
@@ -82,6 +86,8 @@ BTSearchFormComponent >> renderZipCodeEntry: html [
 						id: 'enterZipCOde';
 						class: 'form-control';
 						placeholder: 'Zip Code';
+						attributeAt: 'required' put: true;
+						maxLength: 5;
 						value: self session zipCode;
 						callback: [ :value | self session zipCode: value ] ].
 			html space ]

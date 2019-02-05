@@ -48,7 +48,8 @@ BTApplicationRootComponent >> renderContentOn: html [
 
 { #category : #rendering }
 BTApplicationRootComponent >> updateRoot: anHtmlRoot [
-	super updateRoot: anHtmlRoot .
+	super updateRoot: anHtmlRoot.
 	anHtmlRoot beHtml5.
-	anHtmlRoot title: 'Band Tracker'
+	anHtmlRoot title: 'Band Tracker'.
+	anHtmlRoot script url: 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js'
 ]
