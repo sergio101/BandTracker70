@@ -1,20 +1,19 @@
 Class {
 	#name : #BTEventListing,
 	#superclass : #WAComponent,
-	#instVars : [
-		'events'
-	],
 	#category : #'BandTracker-web'
 }
 
 { #category : #accessing }
-BTEventListing >> events [
-	^ events
+BTEventListing >> distance [
+	^ self session appBrain distance.
 ]
 
 { #category : #accessing }
-BTEventListing >> events: anObject [
-	events := anObject
+BTEventListing >> events [
+	 	^ BTUserInterface
+		retrieveResultsByZipCode: self zipCode
+		andDistance: self distance
 ]
 
 { #category : #rendering }
@@ -26,7 +25,18 @@ BTEventListing >> renderContentOn: html [
 
 { #category : #rendering }
 BTEventListing >> renderEventsListOn: html [
-	html text: 'Events go here'
+	| headerBlock tableBlock |
+	headerBlock := [ html tableHeading: 'Date'.
+	html tableHeading: 'Artist'.
+	html tableHeading: 'Venue'.
+	html tableHeading: 'Lineup' ].
+	tableBlock := [ html tableHead: headerBlock ].
+	html heading
+		level: 2;
+		with: 'Concert Results'.
+	html tbsTable
+		beStriped;
+		with: tableBlock
 ]
 
 { #category : #accessing }

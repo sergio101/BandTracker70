@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'appBrain',
 		'announcer',
-		'zipCode'
+		'zipCode',
+		'distance'
 	],
 	#category : #'BandTracker-web'
 }
