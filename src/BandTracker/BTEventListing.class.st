@@ -11,9 +11,23 @@ BTEventListing >> distance [
 
 { #category : #accessing }
 BTEventListing >> events [
-	 	^ BTUserInterface
+	^ (BTUserInterface
 		retrieveResultsByZipCode: self zipCode
-		andDistance: self distance
+		andDistance: self distance) asSortedCollection: [ :a :b | a date < b date ]
+]
+
+{ #category : #'as yet unclassified' }
+BTEventListing >> eventsAsRows [
+	| result |
+	result := self events
+		collect: [ :event | 
+			Array
+				with: event date asDate
+				with: event artist artistName
+				with: event venueString
+				with: (event lineupString
+				truncate: 40) ].
+	^ result
 ]
 
 { #category : #rendering }
@@ -30,12 +44,16 @@ BTEventListing >> renderEventsListOn: html [
 	html tableHeading: 'Artist'.
 	html tableHeading: 'Venue'.
 	html tableHeading: 'Lineup' ].
-	tableBlock := [ html tableHead: headerBlock ].
+	tableBlock := [ html tableHead: headerBlock.
+	html
+		tableBody: [ self eventsAsRows
+				do: [ :row | html tableRow: [ row do: [ :col | html tableData: col ] ] ] ] ].
 	html heading
 		level: 2;
 		with: 'Concert Results'.
 	html tbsTable
 		beStriped;
+		beCondensed;
 		with: tableBlock
 ]
 

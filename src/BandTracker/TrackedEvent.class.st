@@ -134,6 +134,11 @@ TrackedEvent >> jsonData: anObject [
 ]
 
 { #category : #accessing }
+TrackedEvent >> lineupString [
+	^ (jsonData at: 'lineup')  joinUsing: ','.
+]
+
+{ #category : #accessing }
 TrackedEvent >> venue [
 	^ venue
 ]
@@ -148,4 +153,10 @@ TrackedEvent >> venueGeoPoint [
 	(self venue includesKey: 'latitude') ifTrue: [  ^ GeoPoint withLatitude: ((self venue at: 'latitude') asNumber ) andLongitude: ((self venue at: 'longitude') asNumber ) ]
 	ifFalse: [ ^ GeoPoint withLatitude: 0 andLongitude: 0 ]
 	
+]
+
+{ #category : #'as yet unclassified' }
+TrackedEvent >> venueString [
+^ (self venue at: 'name') , ' - ' , (self venue at: 'city') , ', '
+		, (self venue at: 'region')
 ]
