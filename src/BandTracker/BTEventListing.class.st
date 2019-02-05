@@ -22,11 +22,10 @@ BTEventListing >> eventsAsRows [
 	result := self events
 		collect: [ :event | 
 			Array
-				with: event date asDate
+				with: (event date asDate printFormat:  #(3 2 1 $/ 1 1 2))
 				with: event artist artistName
 				with: event venueString
-				with: (event lineupString
-				truncate: 40) ].
+				with: (event lineupString truncate: 40) ].
 	^ result
 ]
 
@@ -53,7 +52,6 @@ BTEventListing >> renderEventsListOn: html [
 		with: 'Concert Results'.
 	html tbsTable
 		beStriped;
-		beCondensed;
 		with: tableBlock
 ]
 
