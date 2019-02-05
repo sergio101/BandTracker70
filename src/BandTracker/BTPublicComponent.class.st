@@ -27,9 +27,8 @@ BTPublicComponent >> renderContentOn: html [
 		tbsContainer: [ html tbsRow
 				showGrid;
 				with: [ html render: searchForm ] ].
-	self session zipCode isNil
-		ifFalse: [ html
+ html
 				tbsContainer: [ html tbsRow
 						showGrid;
-						with: [ html render: eventListing ] ] ]
+						with: [ html render: eventListing ] ]
 ]

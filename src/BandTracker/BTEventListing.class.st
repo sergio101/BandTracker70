@@ -19,5 +19,17 @@ BTEventListing >> events: anObject [
 
 { #category : #rendering }
 BTEventListing >> renderContentOn: html [
-	html paragraph with: 'will render'.
+	self zipCode isNil
+		ifTrue: [ html text: 'No data yet.' ]
+		ifFalse: [ self renderEventsListOn: html ]
+]
+
+{ #category : #rendering }
+BTEventListing >> renderEventsListOn: html [
+	html text: 'Events go here'
+]
+
+{ #category : #accessing }
+BTEventListing >> zipCode [
+	^ self session zipCode
 ]

@@ -26,10 +26,20 @@ Class {
 
 { #category : #adding }
 RawListing class >> addListingIfNew: aRawListing [
-	"Adds a listing to the entries if it doesn't exist"
-	
-	((self dataEntries) select: [ :e | e md5 = aRawListing md5 ]) isEmpty
-		ifTrue: [ self dataEntries add: aRawListing ]
+	(self dataEntries select: [ :e | e md5 = aRawListing md5 ]) isEmpty
+		ifFalse: [ ^ self ].
+	self dataEntries add: aRawListing.
+	self backupData
+]
+
+{ #category : #'as yet unclassified' }
+RawListing class >> backupData [
+	| s3 bucket dataString fileName |
+	s3 := AWSS3 new.
+	bucket := s3 bucketNamed: 'somabandtracker'.
+	dataString := STON toString: RawListing dataEntries.
+fileName := 'BackupData/RawEntryBackup' , DateAndTime now asUnixTime asString , '.ston'.
+	bucket atKey: fileName putObject: dataString
 ]
 
 { #category : #'as yet unclassified' }
