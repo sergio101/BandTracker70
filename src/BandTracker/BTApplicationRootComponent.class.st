@@ -51,5 +51,8 @@ BTApplicationRootComponent >> updateRoot: anHtmlRoot [
 	super updateRoot: anHtmlRoot.
 	anHtmlRoot beHtml5.
 	anHtmlRoot title: 'Band Tracker'.
-	anHtmlRoot script url: 'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js'
+	anHtmlRoot script url: 'https://code.jquery.com/jquery-2.2.4.min.js'.
+	anHtmlRoot script
+		url:
+			'https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js'
 ]

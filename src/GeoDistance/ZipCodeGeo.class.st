@@ -62,15 +62,22 @@ ZipCodeGeo class >> findByZipCode: aZipCode [
 	^ (self zipCodes) detect: [ :e | e zipCode = aZipCode ] ifNone: [ self addNewZip: aZipCode  ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 ZipCodeGeo class >> getZipCoords: zipCode [
-	| path response re coords |
+	| path response re |
 	path := self apiUrl , '?n=' , zipCode.
 	response := ZnClient new get: path.
 	re := '.+{(.*)}.+' asRegexIgnoringCase.
-	re matchesPrefix: response.
-	coords := (re subexpression: 2) splitOn: ','.
-	^ GeoPoint withLatitude: ((coords at: 1) trimBoth asNumber) andLongitude: ((coords at: 2) trimBoth) asNumber
+	(re matchesPrefix: response)
+		ifTrue: [ ^ self returnGeoPoint: ((re subexpression: 2) splitOn: ',') ]
+		ifFalse: [ ^ nil ]
+]
+
+{ #category : #accessing }
+ZipCodeGeo class >> returnGeoPoint: coords [
+		^ GeoPoint
+		withLatitude: (coords at: 1) trimBoth asNumber
+		andLongitude: (coords at: 2) trimBoth asNumber
 ]
 
 { #category : #'as yet unclassified' }

@@ -17,11 +17,14 @@ BTUserInterface class >> retrieveResultsByZipCode: aZipCode andDistance: distanc
 
 	| zipGeo nearEvents |
 	zipGeo := ZipCodeGeo findByZipCode: aZipCode.
+	zipGeo geoPoint isNil
+	ifTrue: [ nearEvents := OrderedCollection new. ]
+	ifFalse: [ 
 	nearEvents := TrackedEvent events
 		select: [ :e | 
 			(e distanceToGeoPoint: zipGeo geoPoint) < distance
 				& (e date > (DateAndTime today - 7 days)) ].
-	(nearEvents asSortedCollection: [ :a :b | a date < b date ]).
+	(nearEvents asSortedCollection: [ :a :b | a date < b date ]).].
 	^ nearEvents
 ]
 
