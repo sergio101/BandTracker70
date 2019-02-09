@@ -58,7 +58,7 @@ TrackedEvent class >> events: anObject [
 
 { #category : #'as yet unclassified' }
 TrackedEvent class >> findEventById: id [
-	^ self events detect: [ :e | e id = id ] ifNone: nil.
+	^ (self events) detect: [ :e | e id = id ] ifNone: nil.
 ]
 
 { #category : #'instance creation' }
