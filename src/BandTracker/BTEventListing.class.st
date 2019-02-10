@@ -32,27 +32,30 @@ BTEventListing >> eventsAsRows [
 { #category : #rendering }
 BTEventListing >> renderContentOn: html [
 	self zipCode isNil
-		ifTrue: [ html text: 'No data yet.' ]
 		ifFalse: [ self renderEventsListOn: html ]
 ]
 
 { #category : #rendering }
 BTEventListing >> renderEventsListOn: html [
 	| headerBlock tableBlock |
-	headerBlock := [ html tableHeading: 'Date'.
-	html tableHeading: 'Artist'.
-	html tableHeading: 'Venue'.
-	html tableHeading: 'Lineup' ].
-	tableBlock := [ html tableHead: headerBlock.
-	html
-		tableBody: [ self eventsAsRows
-				do: [ :row | html tableRow: [ row do: [ :col | html tableData: col ] ] ] ] ].
-	html heading
-		level: 2;
-		with: 'Concert Results'.
-	html tbsTable
-		beStriped;
-		with: tableBlock
+	self events isNotEmpty
+		ifTrue: [ headerBlock := [ html tableHeading: 'Date'.
+			html tableHeading: 'Artist'.
+			html tableHeading: 'Venue'.
+			html tableHeading: 'Lineup' ].
+			tableBlock := [ html tableHead: headerBlock.
+			html
+				tableBody: [ self eventsAsRows
+						do: [ :row | html tableRow: [ row do: [ :col | html tableData: col ] ] ] ] ].
+			html heading
+				level: 2;
+				with: 'Concert Results'.
+			html tbsTable
+				beStriped;
+				with: tableBlock ]
+		ifFalse: [ html heading
+				level: 3;
+				with: 'So sorry, there were no results for your search. Try increasing the distance.' ]
 ]
 
 { #category : #accessing }
