@@ -9,7 +9,7 @@ BTHeaderComponent >> renderBrandOn: html [
 	html
 		tbsNavbarHeader: [ html tbsNavbarBrand
 				url: self application url;
-				with: 'SomaFM Concert Finder' ]
+				with: 'Bagel Radio Concert Finder' ]
 ]
 
 { #category : #rendering }
