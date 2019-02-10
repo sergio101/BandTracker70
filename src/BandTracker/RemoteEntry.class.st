@@ -52,7 +52,7 @@ RemoteEntry class >> bandEntries: anObject [
 { #category : #'as yet unclassified' }
 RemoteEntry class >> bandsNotTracked [
 	^ self uniqueBandNames asArray
-		copyWithoutAll: ((((TrackedArtist artists)) collect: [ :e | e artistName asLowercase  ]) asArray)
+		copyWithoutAll: ((TrackedArtist artists collect: [ :e | e artistName asLowercase  ]) asArray)
 ]
 
 { #category : #'as yet unclassified' }
