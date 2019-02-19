@@ -34,13 +34,12 @@ BTUserInterface class >> updateAllData [
 
 	| startTime endTime |
 	
-	[ 
 	startTime := DateAndTime now.
 	RawListing updateBandEntries.
 	RemoteEntry updateTrackedArtists.
 	TrackedEvent updateEvents.
 	endTime := DateAndTime now.
-	Transcript show: 'Time to run: ' , (endTime - startTime) asString. ] fork.
+	Transcript show: 'Time to run: ' , (endTime - startTime) asString.
 	
 	
 ]
