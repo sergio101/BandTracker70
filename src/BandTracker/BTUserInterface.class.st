@@ -33,13 +33,13 @@ BTUserInterface class >> updateAllData [
 	"udpate all data on website"
 
 	| startTime endTime |
-	
+	[  
 	startTime := DateAndTime now.
 	RawListing updateBandEntries.
 	RemoteEntry updateTrackedArtists.
 	TrackedEvent updateEvents.
 	endTime := DateAndTime now.
-	Transcript show: 'Time to run: ' , (endTime - startTime) asString.
+	Transcript show: 'Time to run: ' , (endTime - startTime) asString. ] fork.
 	
 	
 ]
