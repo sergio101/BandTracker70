@@ -69,8 +69,8 @@ BTSearchFormComponent >> renderStationSelect: html [
 
 { #category : #rendering }
 BTSearchFormComponent >> renderSubmitButtonOn: html [
-	html tbsSubmitButton with: [ html submitButton class: 'btn btn-primary';
-		callback: [ self getResults ] ]
+	html submitButton class: 'btn btn-primary';
+		callback: [ self getResults ]
 ]
 
 { #category : #rendering }

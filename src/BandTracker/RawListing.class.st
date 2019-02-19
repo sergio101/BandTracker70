@@ -92,7 +92,7 @@ RawListing class >> updateBandEntries [
 			list := e parseRawData.
 			list
 				do: [ :l | 
-					(RemoteEntry bandEntries) add: (RemoteEntry withRawData: l) ].
+					RemoteEntry bandEntries add: (RemoteEntry withRawData: l) ].
 			e processedDate: DateAndTime now ]
 ]
 
