@@ -32,7 +32,8 @@ Class {
 		'id',
 		'venue',
 		'date',
-		'jsonData'
+		'jsonData',
+		'offer'
 	],
 	#classVars : [
 		'events'
@@ -69,6 +70,16 @@ TrackedEvent class >> fromRawData: data [
 		venue: (data at: 'venue');
 		jsonData: data;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+TrackedEvent class >> offerTypes [
+
+| offers list |
+offers := events collect: [ :e | e offers ].
+list := Set new.
+offers do: [ :ea | ea do: [ :e | list add: (e at: 'type') ] ].
+^ list
 ]
 
 { #category : #'as yet unclassified' }
@@ -136,6 +147,11 @@ TrackedEvent >> jsonData: anObject [
 { #category : #accessing }
 TrackedEvent >> lineupString [
 	^ (jsonData at: 'lineup')  joinUsing: ','.
+]
+
+{ #category : #accessing }
+TrackedEvent >> offers [
+	^ jsonData at: 'offers'.
 ]
 
 { #category : #accessing }
