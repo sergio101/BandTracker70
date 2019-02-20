@@ -124,6 +124,13 @@ TrackedEvent >> distanceToGeoPoint: aGeoPoint [
 	^ self venueGeoPoint distanceToPoint: aGeoPoint
 ]
 
+{ #category : #'as yet unclassified' }
+TrackedEvent >> getOfferLink: aType [
+	| res |
+	res := self offers detect: [ :ea | (ea at: 'type') = aType] ifNone: [ ^ nil].
+	^ res at: 'url'.
+]
+
 { #category : #accessing }
 TrackedEvent >> id [
 	^ id
