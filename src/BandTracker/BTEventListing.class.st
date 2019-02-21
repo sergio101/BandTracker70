@@ -16,19 +16,6 @@ BTEventListing >> events [
 		andDistance: self distance) asSortedCollection: [ :a :b | a date < b date ]
 ]
 
-{ #category : #'as yet unclassified' }
-BTEventListing >> eventsAsRows [
-	| result |
-	result := self events
-		collect: [ :event | 
-			Array
-				with: (event date asDate printFormat:  #(3 2 1 $/ 1 1 2))
-				with: event artist artistName
-				with: event venueString
-				with: (event lineupString truncate: 40) ].
-	^ result
-]
-
 { #category : #rendering }
 BTEventListing >> renderContentOn: html [
 	self zipCode isNil
@@ -76,12 +63,9 @@ BTEventListing >> renderEventsRowsOn: html [
 
 { #category : #'as yet unclassified' }
 BTEventListing >> renderHeaderBlock: html [
-	^ html
-		tableHead: [
-			html tableHeading: 'Date'.
-			html tableHeading: 'Artist'.
-			html tableHeading: 'Venue'.
-			html tableHeading: 'Lineup' ]
+	| headers |
+	headers := #('Date' 'Artist' 'Venue' 'Lineup').
+	^ html tableHead: [ headers do: [ :h | html tableHeading: h ] ]
 ]
 
 { #category : #accessing }
