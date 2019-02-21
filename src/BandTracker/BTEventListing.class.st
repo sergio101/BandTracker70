@@ -36,26 +36,52 @@ BTEventListing >> renderContentOn: html [
 ]
 
 { #category : #rendering }
+BTEventListing >> renderErrorOn: html [
+html heading
+				level: 3;
+				with:
+					'So sorry, there were no results for your search. Try increasing the distance.'
+]
+
+{ #category : #rendering }
+BTEventListing >> renderEvent: event on: html [
+html tableRow: [  
+	html tableData: (event date asDate printFormat: #(3 2 1 $/ 1 1 2)).
+	html tableData: event artist artistName.
+	html tableData: event venueString.
+	html tableData: (event lineupString truncate: 40)]
+]
+
+{ #category : #'rendering-parts' }
 BTEventListing >> renderEventsListOn: html [
-	| headerBlock tableBlock |
+	| tableBlock |
 	self events isNotEmpty
-		ifTrue: [ headerBlock := [ html tableHeading: 'Date'.
-			html tableHeading: 'Artist'.
-			html tableHeading: 'Venue'.
-			html tableHeading: 'Lineup' ].
-			tableBlock := [ html tableHead: headerBlock.
-			html
-				tableBody: [ self eventsAsRows
-						do: [ :row | html tableRow: [ row do: [ :col | html tableData: col ] ] ] ] ].
+		ifTrue: [ tableBlock := [ self renderHeaderBlock: html.
+				self renderEventsRowsOn: html.
+ ].
 			html heading
 				level: 2;
 				with: 'Concert Results'.
 			html tbsTable
 				beStriped;
 				with: tableBlock ]
-		ifFalse: [ html heading
-				level: 3;
-				with: 'So sorry, there were no results for your search. Try increasing the distance.' ]
+		ifFalse: [ self renderErrorOn: html ]
+]
+
+{ #category : #rendering }
+BTEventListing >> renderEventsRowsOn: html [
+	html
+		tableBody: [ self events do: [ :e |  self renderEvent: e on: html  ] ]
+]
+
+{ #category : #'as yet unclassified' }
+BTEventListing >> renderHeaderBlock: html [
+	^ html
+		tableHead: [
+			html tableHeading: 'Date'.
+			html tableHeading: 'Artist'.
+			html tableHeading: 'Venue'.
+			html tableHeading: 'Lineup' ]
 ]
 
 { #category : #accessing }

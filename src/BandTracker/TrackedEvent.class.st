@@ -33,7 +33,7 @@ Class {
 		'venue',
 		'date',
 		'jsonData',
-		'offer'
+		'offers'
 	],
 	#classVars : [
 		'events'
