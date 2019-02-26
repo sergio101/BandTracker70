@@ -27,6 +27,8 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #TrackedArtist,
 	#superclass : #Object,
+	#traits : 'PersistVariable',
+	#classTraits : 'PersistVariable classTrait',
 	#instVars : [
 		'id',
 		'artistName',
