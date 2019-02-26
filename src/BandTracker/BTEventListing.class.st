@@ -99,7 +99,8 @@ BTEventListing >> renderTableJsOn: html [
 			(JSStream
 				on:
 					'$(document).ready( function () {
-    $(''#resultsTable'').DataTable();')
+    $(''#resultsTable'').DataTable();
+} );')
 ]
 
 { #category : #accessing }
