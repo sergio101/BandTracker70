@@ -31,7 +31,7 @@ RawListing class >> addListingIfNew: aRawListing [
 	(self dataEntries select: [ :e | e md5 = aRawListing md5 ]) isEmpty
 		ifFalse: [ ^ self ].
 	self dataEntries add: aRawListing.
-	self backupData
+	self backupClassVariable: #dataEntries
 ]
 
 { #category : #'as yet unclassified' }
