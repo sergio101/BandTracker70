@@ -12,6 +12,8 @@ addListingIfNew: to add taht listing if there is no curent match.
 Class {
 	#name : #RawListing,
 	#superclass : #Object,
+	#traits : 'PersistVariable',
+	#classTraits : 'PersistVariable classTrait',
 	#instVars : [
 		'rawData',
 		'dateFetched',

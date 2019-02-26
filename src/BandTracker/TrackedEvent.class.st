@@ -28,6 +28,8 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #TrackedEvent,
 	#superclass : #Object,
+	#traits : 'PersistVariable',
+	#classTraits : 'PersistVariable classTrait',
 	#instVars : [
 		'id',
 		'venue',
