@@ -43,13 +43,16 @@ BTEventListing >> renderEvent: event on: html [
 { #category : #'rendering-parts' }
 BTEventListing >> renderEventsListOn: html [
 	| tableBlock |
+	self renderTableJsOn: html.
 	self events isNotEmpty
-		ifTrue: [ tableBlock := [  self renderHeaderBlock: html.self renderEventsRowsOn: html ].
+		ifTrue: [ tableBlock := [ self renderHeaderBlock: html.
+			self renderEventsRowsOn: html ].
 			html heading
 				level: 2;
 				with: 'Concert Results'.
-			html tbsTable
-				beStriped;
+			html
+				table
+				id: 'resultsTable';
 				with: tableBlock ]
 		ifFalse: [ self renderErrorOn: html ]
 ]
@@ -87,6 +90,16 @@ BTEventListing >> renderOffersFor: event on: html [
 { #category : #rendering }
 BTEventListing >> renderOffersOn: html [ 
 	self renderFontAwesome: 'fa fa-ticket-alt' on: html.
+]
+
+{ #category : #rendering }
+BTEventListing >> renderTableJsOn: html [
+	html
+		script:
+			(JSStream
+				on:
+					'$(document).ready( function () {
+    $(''#resultsTable'').DataTable();')
 ]
 
 { #category : #accessing }
