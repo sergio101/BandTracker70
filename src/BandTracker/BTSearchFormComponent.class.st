@@ -17,7 +17,7 @@ BTSearchFormComponent >> getResults [
 BTSearchFormComponent >> initialize [
 	super initialize.
 	stationList := Station stations collect: [ :e | e stationName ].
-	distancesList := #(10 25 50 75 100)
+	distancesList := #(10 25 50 75 100 250)
 ]
 
 { #category : #rendering }
